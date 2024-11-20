@@ -2,6 +2,8 @@ import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import { useState } from 'react';
 import { Colors } from './utils/colors';
+import Title from '../components/ui/Title';
+import Card from '../components/ui/Card';
 
 const StartGameScreen = ({
 	onPickNumber,
@@ -38,22 +40,26 @@ const StartGameScreen = ({
 	};
 
 	return (
-		<View style={styles.inputContainer}>
-			<TextInput
-				style={styles.numberInput}
-				maxLength={2}
-				keyboardType="number-pad"
-				onChangeText={numberInputHandler}
-				value={enteredNumber}
-			/>
-			<View style={styles.buttonsContainer}>
-				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+		<View style={styles.rootContainer}>
+			<Title title="Guess my Number"></Title>
+			<Card>
+				<Text style={styles.instructionText}>Enter a number</Text>
+				<TextInput
+					style={styles.numberInput}
+					maxLength={2}
+					keyboardType="number-pad"
+					onChangeText={numberInputHandler}
+					value={enteredNumber}
+				/>
+				<View style={styles.buttonsContainer}>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+					</View>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+					</View>
 				</View>
-				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-				</View>
-			</View>
+			</Card>
 		</View>
 	);
 };
@@ -61,22 +67,14 @@ const StartGameScreen = ({
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-	inputContainer: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: 16,
+	rootContainer: {
+		flex: 1,
 		marginTop: 100,
-		backgroundColor: Colors.primary800,
-		marginHorizontal: 24,
-		borderRadius: 8,
-		elevation: 4,
-		shadowColor: 'black',
-		shadowOffset: {
-			width: 1,
-			height: 2,
-		},
-		shadowRadius: 6,
-		shadowOpacity: 0.25,
+		alignItems: 'center',
+	},
+	instructionText: {
+		color: Colors.accent500,
+		fontSize: 24,
 	},
 	numberInput: {
 		height: 50,

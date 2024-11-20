@@ -6,7 +6,6 @@ import GameScreen from './screens/GameScreen';
 import { Colors } from './screens/utils/colors';
 import GameOverScreen from './screens/GameOverScreen';
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
 
 // Keep the splash screen visible while we fetch resources

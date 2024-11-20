@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 import Title from '../components/ui/Title';
 import { useState, useEffect } from 'react';
 import { generateRandomBetween } from './utils/generateRandomBetween';
@@ -7,6 +7,7 @@ import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import { Colors } from './utils/colors';
 import { Ionicons } from '@expo/vector-icons';
+import GuessLogItem from '../components/game/GuessLogItem';
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -16,16 +17,21 @@ const GameScreen = ({
 	onGameOver,
 }: {
 	userNumber: number;
-	onGameOver: () => void;
+	onGameOver: (rounds: number) => void;
 }) => {
 	const inititalGuess = generateRandomBetween(1, 100, userNumber);
 	const [currentGuess, setCurrentGuess] = useState(inititalGuess);
+	const [guessRounds, setguessRounds] = useState([inititalGuess]);
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
-			onGameOver();
+			onGameOver(guessRounds.length);
 		}
 	}, [currentGuess, userNumber, onGameOver]);
+
+	useEffect(() => {
+		(minBoundary = 1), (maxBoundary = 100);
+	}, []);
 
 	const nextGuessHandler = (direction: string) => {
 		if (
@@ -52,7 +58,10 @@ const GameScreen = ({
 			currentGuess
 		);
 		setCurrentGuess(newRandNumber);
+		setguessRounds((prev) => [newRandNumber, ...prev]);
 	};
+
+	const guessRoundListLenght = guessRounds.length;
 
 	return (
 		<View style={styles.screen}>
@@ -78,6 +87,21 @@ const GameScreen = ({
 					</View>
 				</View>
 			</Card>
+			<View style={styles.guessLogContainer}>
+				{/* {guessRounds.map((guessRound) => (
+					<Text key={guessRound}>{guessRound}</Text>
+				))} */}
+				<FlatList
+					data={guessRounds}
+					renderItem={({ index, item }) => (
+						<GuessLogItem
+							roundNumber={guessRoundListLenght - index}
+							guess={item}
+						/>
+					)}
+					keyExtractor={(item) => item.toString()}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -95,5 +119,9 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		flex: 1,
+	},
+	guessLogContainer: {
+		flex: 1,
+		padding: 16,
 	},
 });

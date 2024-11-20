@@ -6,6 +6,7 @@ import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import { Colors } from './utils/colors';
+import { Ionicons } from '@expo/vector-icons';
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -66,13 +67,13 @@ const GameScreen = ({
 				<View style={styles.buttonsContainer}>
 					<View style={styles.buttonContainer}>
 						<PrimaryButton onPress={nextGuessHandler.bind(this, 'higher')}>
-							+
+							<Ionicons name="add" size={24} color="white" />
 						</PrimaryButton>
 					</View>
 
 					<View style={styles.buttonContainer}>
 						<PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-							-
+							<Ionicons name="remove" size={24} color="white" />
 						</PrimaryButton>
 					</View>
 				</View>

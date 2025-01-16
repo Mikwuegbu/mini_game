@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import Title from '../components/ui/Title';
 import { Colors } from './utils/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -33,6 +33,9 @@ const GameOverScreen = ({
 
 export default GameOverScreen;
 
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
 	rootContainer: {
 		flex: 1,
@@ -42,8 +45,8 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		borderRadius: 150,
-		width: 300,
-		height: 300,
+		width: deviceWidth < 380 ? 150 : 300,
+		height: deviceWidth < 380 ? 150 : 300,
 		borderWidth: 3,
 		borderColor: Colors.primary800,
 		overflow: 'hidden',

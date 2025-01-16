@@ -6,7 +6,7 @@ import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import { Colors } from './utils/colors';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import GuessLogItem from '../components/game/GuessLogItem';
 
 let minBoundary = 1;

@@ -3,7 +3,15 @@ import Title from '../components/ui/Title';
 import { Colors } from './utils/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
 
-const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
+const GameOverScreen = ({
+	roundsNumber,
+	userNumber,
+	onStartNewGame,
+}: {
+	roundsNumber: any;
+	userNumber: any;
+	onStartNewGame: any;
+}) => {
 	return (
 		<View style={styles.rootContainer}>
 			<Title title="GAME OVER!" />
